@@ -11,13 +11,14 @@ async function loader(slug: string) {
 }
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  searchParams: Promise <{ page?:string; query?:string}>
 }
 
 
 
-export default async function BlogRoute({ params }: PageProps) {
+export default async function BlogRoute({ searchParams }: PageProps) {
 //   const slug = (await params).slug;
+  const {page,query} =await searchParams;
   const { blocks } = await loader("blog");
   return <div>
     
@@ -27,6 +28,10 @@ export default async function BlogRoute({ params }: PageProps) {
   path="/api/articles"
   component={BlogCard}
   featured
+  showSearch
+  query={query}
+  showPagination
+  page={page}
 />
 
   </div>;

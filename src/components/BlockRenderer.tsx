@@ -9,6 +9,13 @@ import {LogoCarouselBlock} from "@/components/blocks/LogoCarouselBlock";
 import { TestimonialsBlock } from "@/components/blocks/TestimonialsBlock";
 import { FeaturesBlock } from "@/components/blocks/FeatureBlocks";
 import { FeaturedArticle } from "@/components/blocks/FeaturedArticle";
+import { AboutSection } from "@/components/blocks/AboutSection";
+import { AboutInfo } from "@/components/blocks/AboutInfo";
+import { FullImage } from "@/components/blocks/FullImage";
+import { Heading } from "@/components/blocks/Heading";
+import { Paragraph } from "@/components/blocks/Paragraph";
+import { ParagraphWithImage } from "@/components/blocks/ParagraphWithImage";
+
 
 function blockRenderer(block: Block, index: number) {
   switch (block.__component) {
@@ -29,7 +36,19 @@ function blockRenderer(block: Block, index: number) {
     case "blocks.features-block" :
         return <FeaturesBlock {...block} key={index} />;
     case "blocks.featured-article":
-        return <FeaturedArticle {...block} key={index}/>
+        return <FeaturedArticle {...block} key={index}/>;
+    case "blocks.about-section":
+        return <AboutSection {...block} key={index} />;
+    case "blocks.about-info":
+        return <AboutInfo {...block} key={index} />;
+    case "blocks.heading":
+      return <Heading {...block} key={index} />;
+    case "blocks.paragraph-with-image":
+      return <ParagraphWithImage {...block} key={index} />;
+    case "blocks.paragraph":
+      return <Paragraph {...block} key={index} />;
+    case "blocks.full-image":
+      return <FullImage {...block} key={index} />;
 
     default:
       return null;

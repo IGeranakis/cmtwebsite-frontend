@@ -1,27 +1,3 @@
-// export interface Slide {
-//   title: string;
-//   image?: {
-//     data: {
-//       attributes: {
-//         url: string;
-//       };
-//     };
-//   };
-// }
-
-// export interface Milestone {
-//   label: string;
-//   value: number;
-// }
-
-// export interface HomepageData {
-//   title: string;
-//   subtitle: string;
-//   buttonText: string;
-//   buttonLink: string;
-//   slide: Slide[];
-//   milestone: Milestone[];
-// }
 
 
 export interface LinkProps {
@@ -52,7 +28,12 @@ export interface ArticleProps {
   description: string;
   slug: string;
   image: ImageProps;
+  
   author: string;
+  imageAuthor?: {
+    url: string;
+    alternativeText?: string;
+  };
   featured: boolean;
   publishedAt: string;
   createdAt: string;
@@ -62,7 +43,17 @@ export interface ArticleProps {
 
 
 
-type ComponentType = "blocks.hero-section" | "blocks.info-block"   | "blocks.milestones-block" | "blocks.vertical-accordion-block" | "blocks.services-accordion-block" | "blocks.logo-carousel-block" | "blocks.testimonials-block" | "blocks.features-block" | "blocks.featured-article";
+type ComponentType = "blocks.hero-section" | "blocks.info-block"   
+                | "blocks.milestones-block" | "blocks.vertical-accordion-block" 
+                | "blocks.services-accordion-block" | "blocks.logo-carousel-block"
+                 | "blocks.testimonials-block" | "blocks.features-block" 
+                 | "blocks.featured-article"
+                 | "blocks.about-info"
+                 | "blocks.about-section"
+                 | "blocks.heading"
+                  | "blocks.paragraph-with-image"
+                  | "blocks.paragraph"
+                  | "blocks.full-image";
 
 interface Base<
   T extends ComponentType,
@@ -77,7 +68,14 @@ interface Base<
   data?: D;
 }
 
-export type Block = HeroSectionProps | InfoBlockProps | MilestonesBlockProps | VerticalAccordionBlockProps | ServicesAccordionBlockProps | LogoCarouselBlockProps | TestimonialsBlockProps | FeaturesBlockProps | FeaturedArticleProps;
+export type Block = HeroSectionProps | InfoBlockProps | MilestonesBlockProps
+ | VerticalAccordionBlockProps | ServicesAccordionBlockProps 
+ | LogoCarouselBlockProps | TestimonialsBlockProps 
+ | FeaturesBlockProps | FeaturedArticleProps | AboutSectionProps | AboutInfoProps
+   | HeadingProps
+  | ParagraphWithImageProps
+  | ParagraphProps
+  | FullImageProps;
 
 export interface HeroSectionProps extends Base<"blocks.hero-section"> {
   theme: "black" | "blue";
@@ -211,4 +209,35 @@ export interface FeaturedArticleProps extends Base<"blocks.featured-article"> {
   image: ImageProps;
 }
 
+export interface AboutSectionProps extends Base<"blocks.about-section"> {
+  title: string;
+  description: string;
+  infographic: ImageProps;
+}
+ 
+export interface AboutInfoProps extends Base<"blocks.about-info"> {
+  title: string;
+  content: string;
+}
 
+export interface HeadingProps extends Base<"blocks.heading"> {
+  heading: string;
+  linkId?: string;
+}
+
+export interface ParagraphWithImageProps extends Base<"blocks.paragraph-with-image"> {
+  content: string;
+  image: ImageProps;
+  reversed?: boolean;
+  imageLandscape?: boolean;
+}
+
+export interface ParagraphProps extends Base<"blocks.paragraph"> {
+  content: string;
+}
+
+export interface FullImageProps extends Base<"blocks.full-image"> {
+  id: number;
+  __component: "blocks.full-image";
+  image: ImageProps;
+}

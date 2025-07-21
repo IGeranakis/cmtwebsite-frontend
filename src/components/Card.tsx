@@ -9,6 +9,10 @@ export interface CardProps {
   description: string;
   slug: string;
   image: ImageProps;
+   imageAuthor?: {
+    url: string;
+    alternativeText?: string;
+  };
   author:string;
   price?: number;
   startDate?: string;
@@ -22,6 +26,7 @@ export function Card({
   slug,
   image,
   author,
+  imageAuthor,
   price,
   createdAt,
   startDate,
@@ -53,18 +58,39 @@ export function Card({
         </p>
 
         {/* Author section */}
-        <div className="flex items-center gap-3 mt-4">
-          {/* Placeholder for Avatar */}
-          <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-            {/* Optional: Add profile image here if available */}
-          </div>
-          <div className="bg-gray-100 px-3 py-1 rounded-full text-sm">
-            <span className="text-blue-600 font-medium block">{author}</span>
-            <span className="text-gray-500 text-xs">
-              {formatDate(startDate ?? createdAt)}
-            </span>
-          </div>
-        </div>
+
+
+
+        {/*figma author section */}
+<div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-fit shadow">
+  {/* Profile Image with Figma-style cyan shadow */}
+  <div
+    className="w-11 h-11 mr-3 rounded-full relative"
+    style={{
+      boxShadow: "-2.54px 0px 3.8px 0px #1E9BFB",
+    }}
+  >
+      {imageAuthor?.url && (
+
+    <StrapiImage
+      src={imageAuthor?.url}
+      alt={imageAuthor?.alternativeText || "Author"}
+      width={44}
+      height={44}
+      className="w-full h-full rounded-full object-cover"
+    />)}
+  </div>
+
+  {/* Author Name and Date */}
+  <div className="flex flex-col leading-tight">
+    <span className="text-[#1E9BFB] font-semibold text-sm">{author}</span>
+    <span className="text-gray-600 text-xs mt-0.5">     {formatDate(startDate ?? createdAt)}</span>
+  </div>
+</div>
+
+
+
+  
       </div>
     </Link>
   );

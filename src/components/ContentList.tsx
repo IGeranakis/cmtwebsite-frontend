@@ -1,5 +1,7 @@
 import { ArticleProps } from "@/types";
 import { getContent } from "@/data/loaders";
+import { PaginationComponent} from "@/components/PaginationComponent"
+import { Search } from "@/components/Search";
 
 interface ContentListProps {
   headline: string;
@@ -8,12 +10,17 @@ interface ContentListProps {
   featured?: boolean;
   component: React.ComponentType<ArticleProps & { basePath: string }>;
   headlineAlignment?: "center" | "right" | "left";
+  showSearch?:boolean;
+  page?:string;
+  showPagination?:boolean;
+  layout?:"grid" | "vertical"
 }
 
-async function loader(path: string ,featured?:boolean) {
-  const { data } = await getContent(path,featured);
+async function loader(path: string ,featured?:boolean,query?:string, page?:string) {
+  const { data, meta } = await getContent(path,featured,query ,page);
   return {
     articles: (data as ArticleProps[]) || [],
+    pageCount:meta?.pagination?.pageCount || 1,
   };
 }
 
@@ -23,8 +30,13 @@ export async function ContentList({
   featured,
   component,
   headlineAlignment = "left",
+  showSearch,
+  query,
+  page,
+  showPagination,
+  layout = "grid", // <- default to grid layout
 }: Readonly<ContentListProps>) {
-  const { articles } = await loader(path,featured);
+  const { articles, pageCount } = await loader(path, featured, query, page);
   const Component = component;
 
   const alignmentClass = {
@@ -35,17 +47,25 @@ export async function ContentList({
 
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-10">
-      {/* Headline */}
       <h3 className={`text-3xl font-bold mb-8 ${alignmentClass}`}>
         {headline || "Featured Articles"}
       </h3>
 
-      {/* Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {showSearch && (<div><Search /><br></br></div>)}
+
+      <div
+        className={
+          layout === "grid"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            : "flex flex-col gap-6"
+        }
+      >
         {articles.map((article) => (
           <Component key={article.documentId} {...article} basePath={path} />
         ))}
       </div>
+
+      {showPagination && <PaginationComponent pageCount={pageCount} />}
     </section>
   );
 }
