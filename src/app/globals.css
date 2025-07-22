@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+html {
+  scroll-behavior: smooth;
+}
 .customgray {
   color: rgb(36 42 46 / 46%);
 }

@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { getGlobalSettings } from "@/data/loaders";
+// import { StickyMenu } from "@/components/StickyMenu";
 
 const roboto = Roboto({
   variable: "--font-sans", // Updated to match your globals.css usage
@@ -42,6 +43,7 @@ export default async function RootLayout({
         className={`${roboto.variable} ${geistMono.variable} antialiased`}
       >
         <Header data={header} />
+        {/* <StickyMenu /> */}
         {children}
         <Footer data={footer} />
       </body>

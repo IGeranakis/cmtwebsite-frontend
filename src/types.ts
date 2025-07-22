@@ -53,7 +53,8 @@ type ComponentType = "blocks.hero-section" | "blocks.info-block"
                  | "blocks.heading"
                   | "blocks.paragraph-with-image"
                   | "blocks.paragraph"
-                  | "blocks.full-image";
+                  | "blocks.full-image"
+                  | "blocks.sticky-menu";
 
 interface Base<
   T extends ComponentType,
@@ -75,7 +76,8 @@ export type Block = HeroSectionProps | InfoBlockProps | MilestonesBlockProps
    | HeadingProps
   | ParagraphWithImageProps
   | ParagraphProps
-  | FullImageProps;
+  | FullImageProps
+  | StickyMenuProps;
 
 export interface HeroSectionProps extends Base<"blocks.hero-section"> {
   theme: "black" | "blue";
@@ -218,6 +220,7 @@ export interface AboutSectionProps extends Base<"blocks.about-section"> {
 export interface AboutInfoProps extends Base<"blocks.about-info"> {
   title: string;
   content: string;
+  heading:string;
 }
 
 export interface HeadingProps extends Base<"blocks.heading"> {
@@ -241,3 +244,23 @@ export interface FullImageProps extends Base<"blocks.full-image"> {
   __component: "blocks.full-image";
   image: ImageProps;
 }
+
+export interface StickyMenuProps {
+  // __component: "blocks.sticky-menu";
+  // id: number;
+  // logo?: LogoProps;
+  // text: string;
+  // href: string;
+  // isExternal: boolean;
+  id:number;
+  __component: "blocks.sticky-menu";
+  logo?: LogoProps;
+  navigation: {
+    id: number;
+    text: string;
+    href: string;
+  }[];
+  aboutInfoBlocks: Block[];
+}
+
+

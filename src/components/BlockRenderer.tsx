@@ -15,9 +15,11 @@ import { FullImage } from "@/components/blocks/FullImage";
 import { Heading } from "@/components/blocks/Heading";
 import { Paragraph } from "@/components/blocks/Paragraph";
 import { ParagraphWithImage } from "@/components/blocks/ParagraphWithImage";
+import { StickyMenuBlock } from "@/components/blocks/StickyMenuBlock";
 
 
-function blockRenderer(block: Block, index: number) {
+function blockRenderer(block: Block, index: number,allBlocks: Block[]) {
+    
   switch (block.__component) {
     case "blocks.hero-section":
       return <HeroSection {...block} key={index} />;
@@ -49,12 +51,24 @@ function blockRenderer(block: Block, index: number) {
       return <Paragraph {...block} key={index} />;
     case "blocks.full-image":
       return <FullImage {...block} key={index} />;
-
+    case "blocks.sticky-menu": {
+      const aboutInfoBlocks = allBlocks.filter(
+        (b): b is Block & { __component: "blocks.about-info" } =>
+          b.__component === "blocks.about-info"
+      );
+      return (
+        <StickyMenuBlock
+          {...block}
+          aboutInfoBlocks={aboutInfoBlocks}
+          key={index}
+        />
+      );
+    }
     default:
       return null;
   }
 }
 
 export function BlockRenderer({ blocks }: { blocks: Block[] }) {
-  return blocks.map((block, index) => blockRenderer(block, index));
+  return blocks.map((block, index) => blockRenderer(block, index,blocks));
 }

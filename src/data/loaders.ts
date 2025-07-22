@@ -177,6 +177,20 @@ const pageBySlugQuery = (slug: string) =>
                 cta: true,
               },
             },
+
+            "blocks.sticky-menu": {
+              populate: {
+                logo: {
+                  populate: {
+                    image: {
+                      fields: ["url", "alternativeText"],
+                    },
+                  },
+                },
+                navigation:true,
+              },
+            },
+
             "blocks.info-block": {
               populate: {
                 image: {
