@@ -23,7 +23,7 @@ export function Header({ data }: HeaderProps) {
   const { logo, navigation, cta } = data;
 
   return (
-    <header className={`w-full border-b ${headerLight ? "bg-white" : "bg-white"}`}>
+    <header className={`w-full ${headerLight ? "bg-white" : "bg-white"}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">

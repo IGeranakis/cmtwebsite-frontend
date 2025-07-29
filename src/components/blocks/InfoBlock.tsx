@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { StrapiImage } from "../StrapiImage";
 import type { InfoBlockProps } from "@/types";
+import { StrapiVideo } from "../StrapiVideo";
 
 export function InfoBlock({
   headline,
@@ -34,15 +35,26 @@ export function InfoBlock({
 
       {/* Image or Video Placeholder */}
       <div className="mt-12 flex justify-center">
-        <div className="relative w-full max-w-3xl h-64 bg-gray-200 flex items-center justify-center rounded-md shadow-sm">
+        <div className="relative w-full max-w-7xl h-64 bg-gray-200 flex items-center justify-center rounded-md shadow-sm">
           {image ? (
-            <StrapiImage
-              src={image.url}
-              alt={image.alternativeText || "Placeholder"}
-              className="w-full h-full object-cover rounded-md"
-              width={1200}
-              height={400}
-            />
+            // <StrapiImage
+            //   src={image.url}
+            //   alt={image.alternativeText || "Placeholder"}
+            //   className="w-full h-full object-cover rounded-md"
+            //   width={1200}
+            //   height={400}
+            // />
+
+            <StrapiVideo
+  src={image.url}
+  className="w-full h-full object-cover rounded-md"
+  controls={false}
+  autoPlay={true}
+  loop={true}
+  muted={true}
+/>
+
+
           ) : (
             <div className="flex items-center justify-center">
               <div className="w-16 h-16 rounded-full border-4 border-white bg-white/30 flex items-center justify-center">

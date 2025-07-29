@@ -7,7 +7,7 @@ import Link from "next/link";
 export function VerticalAccordionBlock({ items }: VerticalAccordionBlockProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const visibleCount = 4;
+  const visibleCount = 5;
 
   const getVisibleItems = () => {
     const start = Math.max(0, Math.min(activeIndex - 1, items.length - visibleCount));
@@ -17,8 +17,10 @@ export function VerticalAccordionBlock({ items }: VerticalAccordionBlockProps) {
   const visibleItems = getVisibleItems();
 
   return (
-    <section className="flex justify-center py-12 overflow-hidden">
-      <div className="flex h-[400px] w-[min(40%,1200px)] rounded-md gap-3 transition-all duration-500 ease-in-out overflow-hidden">
+    // <section className="flex justify-start py-12 overflow-hidden">
+    //   <div className="flex h-[400px] w-[min(40%,1200px)] rounded-md gap-3 transition-all duration-500 ease-in-out overflow-hidden">
+    <section className="w-full max-w-7xl mx-auto py-12 px-4 sm:px-8">
+<div className="flex h-[500px] w-full max-w-6xl rounded-md gap-3 transition-all duration-500 ease-in-out overflow-hidden">
         {visibleItems.map((item, index) => {
           const globalIndex = items.findIndex((i) => i === item);
           const isActive = globalIndex === activeIndex;
@@ -33,8 +35,9 @@ export function VerticalAccordionBlock({ items }: VerticalAccordionBlockProps) {
               ///                ${isActive ? "w-[60%] bg-white" : "w-[70px] bg-[#D9D9D9] hover:bg-zinc-50"}
 
               className={`transition-all duration-500 ease-in-out flex-shrink-0 cursor-pointer 
-                ${isActive ? "w-[60%] bg-white" : "w-[70px] bg-[#D9D9D9] hover:bg-zinc-50"}
-               
+                
+                ${isActive ? "w-[75%] bg-white" : "w-[5%] bg-[#D9D9D9] hover:bg-zinc-50"}
+
                 h-full border border-gray-300 flex items-center justify-center relative overflow-hidden`}
             >
               {/* Inactive Panel: Rotated Label */}
@@ -43,8 +46,8 @@ export function VerticalAccordionBlock({ items }: VerticalAccordionBlockProps) {
                   <span className="text-4xl font-semibold mb-2 truncate customgray">
                     {String(globalIndex + 1).padStart(2, "0")}
                   </span>
-                  <div className="h-[300px] flex items-center justify-center">
-                    <span className="text-xl font-medium transform -rotate-90 origin-center whitespace-nowrap truncate max-w-[250px]">
+                  <div className="h-[400px] flex items-center justify-center">
+                    <span className="text-xl font-medium transform -rotate-90 origin-center whitespace-nowrap truncate max-w-[350px]">
                       {item.title}
                     </span>
                   </div>

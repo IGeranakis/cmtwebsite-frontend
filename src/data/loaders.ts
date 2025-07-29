@@ -91,6 +91,9 @@ const BLOG_PAGE_SIZE = 3;
 const BASE_URL = getStrapiURL();
 
 
+
+
+
 export async function getHomePage() {
   const path = "/api/home-page";
   const url = new URL(path, BASE_URL);
@@ -102,6 +105,11 @@ export async function getHomePage() {
 
   return fetchAPI(url.href, { method: "GET" });
 }
+
+
+
+
+
 
 
 
@@ -188,6 +196,7 @@ const pageBySlugQuery = (slug: string) =>
                   },
                 },
                 navigation:true,
+                hamnavigation:true,
               },
             },
 
@@ -214,7 +223,23 @@ const pageBySlugQuery = (slug: string) =>
                 },
               },
             },
-            "blocks.about-info": true
+            "blocks.about-info": true,
+
+            "blocks.team-grid": {
+              populate: {
+                team_members: {
+                  populate: {
+                    ProfileImage: {
+                      fields: ["url", "alternativeText"],
+                    },
+                    CoverImage:{
+                      fields: ["url", "alternativeText"],
+                    }
+                  },
+                },
+                },
+              },
+
           },
         },
       },
@@ -232,20 +257,28 @@ export async function getPageBySlug(slug: string) {
 
 
 
-export async function getContent(path: string, featured?:boolean,query?:string, page?:string) {
+export async function getContent(path: string, featured?: boolean, query?: string, page?: string, category?: string) {
   const url = new URL(path, BASE_URL);
 
   url.search = qs.stringify({
     sort: ["createdAt:desc"],
-       filters: {
-         $or: [
-        { title: { $containsi: query } },
-        { description: { $containsi: query } },
-      ],
-    
+    filters: {
+      ...(query && {
+        $or: [
+          { title: { $containsi: query } },
+          { description: { $containsi: query } },
+        ],
+      }),
       ...(featured && { featured: { $eq: featured } }),
+      ...(category && {
+        categories: {
+          name: {
+            $eq: category,
+          },
+        },
+      }),
     },
-     pagination: {
+    pagination: {
       pageSize: BLOG_PAGE_SIZE,
       page: parseInt(page || "1"),
     },
@@ -254,14 +287,70 @@ export async function getContent(path: string, featured?:boolean,query?:string, 
         fields: ["url", "alternativeText"],
       },
       imageAuthor: {
-    fields: ["url", "alternativeText"], // ✅ ADD THIS
-  },
-      
+        fields: ["url", "alternativeText"],
+      },
+      categories: {
+        fields: ["name"], // ✅ get category names
+      },
     },
   });
 
   return fetchAPI(url.href, { method: "GET" });
 }
+
+export async function getCategories() {
+  const res = await fetchAPI(`${BASE_URL}/api/categories?fields[0]=name`, {
+    method: "GET",
+  });
+
+  const raw = res?.data || [];
+
+  const unique = new Map();
+
+  for (const cat of raw) {
+    const id = cat.id;
+    const name = cat.name;
+    if (!unique.has(name)) {
+      unique.set(name, { id, name });
+    }
+  }
+
+  return Array.from(unique.values());
+}
+
+// export async function getContent(path: string, featured?:boolean,query?:string, page?:string) {
+//   const url = new URL(path, BASE_URL);
+
+//   url.search = qs.stringify({
+//     sort: ["createdAt:desc"],
+//        filters: {
+//          $or: [
+//         { title: { $containsi: query } },
+//         { description: { $containsi: query } },
+//       ],
+    
+//       ...(featured && { featured: { $eq: featured } }),
+//     },
+//      pagination: {
+//       pageSize: BLOG_PAGE_SIZE,
+//       page: parseInt(page || "1"),
+//     },
+//     populate: {
+//       image: {
+//         fields: ["url", "alternativeText"],
+//       },
+//       imageAuthor: {
+//         fields: ["url", "alternativeText"], // ✅ ADD THIS
+//       },
+//        categories: {
+//         fields: ["name"], // ✅ include category names
+//      },
+      
+//     },
+//   });
+
+//   return fetchAPI(url.href, { method: "GET" });
+// }
 
 const blogPopulate = {
   blocks: {
@@ -322,6 +411,10 @@ const blogPopulate = {
   },
 };
 
+
+
+
+
 export async function getContentBySlug(slug: string, path: string) {
   const url = new URL(path, BASE_URL);
   url.search = qs.stringify({
@@ -344,4 +437,48 @@ export async function getContentBySlug(slug: string, path: string) {
   return fetchAPI(url.href, { method: "GET" });
 }
 
+
+export async function getArticleOfTheDay() {
+  const url = new URL("/api/articles", getStrapiURL());
+
+  url.search = qs.stringify({
+    filters: {
+      articleOfTheDay: { $eq: true },
+    },
+    populate: {
+      image: { fields: ["url", "alternativeText"] },
+      imageAuthor: { fields: ["url", "alternativeText"] },
+    },
+    sort: ["createdAt:desc"],
+    pagination: { pageSize: 1 }, // Only one
+  });
+
+  const res = await fetchAPI(url.href, { method: "GET" });
+  return res?.data?.[0]; // return single article
+}
+
+const memberPopulate = {
+  ProfileImage: {
+    fields: ["url", "alternativeText"],
+  },
+  LinkedInUrl: true,
+  Bio: true,
+};
+ 
+export async function getTeamMemberBySlug(slug: string) {
+  const query = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+      populate: memberPopulate,
+    },
+    { encodeValuesOnly: true }
+  );
+ 
+  const url = new URL(`/api/team-members?${query}`, BASE_URL);
+  return await fetchAPI(url.href, { method: "GET" });
+}
 

@@ -1,9 +1,11 @@
-import { StickyMenuProps, AboutInfoProps } from "@/types";
+import { StickyMenuProps, AboutInfoProps,LogoProps,LinkProps } from "@/types";
 import { StrapiImage } from "./StrapiImage";
 import { useScrollSpy } from "@/utils/useScrollspy";
 
+
 interface ExtendedStickyMenuProps extends StickyMenuProps {
   aboutInfoBlocks: AboutInfoProps[];
+ 
 }
 
 export function StickyMenuBlock({
@@ -26,8 +28,8 @@ export function StickyMenuBlock({
         <div className="flex items-center gap-2">
           {logo?.image?.url && (
             <StrapiImage
-              src={logo.image.url}
-              alt={logo.image.alternativeText}
+              src={logo.image.url }
+              alt={logo.image.alternativeText || logo.logoText || "error.png" }
               width={120}
               height={120}
               className="object-contain"

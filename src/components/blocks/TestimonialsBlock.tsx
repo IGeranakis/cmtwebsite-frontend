@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { TestimonialsBlockProps } from "@/types";
 import Image from "next/image";
 import { StrapiImage } from "../StrapiImage";
+import { AnimatedTestimonials } from "../ui/animated-testimonials";
+
 
 export function TestimonialsBlock({ items }: TestimonialsBlockProps) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -50,6 +52,19 @@ export function TestimonialsBlock({ items }: TestimonialsBlockProps) {
           </div>
         </div>
       </div>
+<AnimatedTestimonials
+  testimonials={items.map((item) => ({
+    quote: item.quote,
+    name: item.name,
+    designation: item.position,
+    src: item.image?.url?.startsWith("http")
+      ? item.image.url
+      : `http://localhost:1337${item.image?.url}`,
+  }))}
+/>
+
+      
+     
     </section>
   );
 }

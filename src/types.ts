@@ -20,6 +20,35 @@ export interface LogoProps {
 }
 
 
+export interface FeaturedArticleProps extends Base<"blocks.featured-article"> {
+  title: string;
+  excerpt: string;
+  link: LinkProps;
+  image: ImageProps;
+  author: {
+    name: string;
+    imageAuthor?: ImageProps;
+  };
+  publishedAt: string;
+}
+
+
+
+// export interface FeaturedArticleProps {
+//   id: number;
+//   title: string;
+//   excerpt: string;
+//   image: ImageProps;
+//   link: {
+//     href: string;
+//     text: string;
+//   };
+//   author: {
+//     name: string;
+//     imageAuthor?: ImageProps;
+//   };
+//   publishedAt: string;
+// }
 
 export interface ArticleProps {
   id: number;
@@ -54,7 +83,8 @@ type ComponentType = "blocks.hero-section" | "blocks.info-block"
                   | "blocks.paragraph-with-image"
                   | "blocks.paragraph"
                   | "blocks.full-image"
-                  | "blocks.sticky-menu";
+                  | "blocks.sticky-menu"
+                  |"blocks.team-grid";
 
 interface Base<
   T extends ComponentType,
@@ -77,7 +107,8 @@ export type Block = HeroSectionProps | InfoBlockProps | MilestonesBlockProps
   | ParagraphWithImageProps
   | ParagraphProps
   | FullImageProps
-  | StickyMenuProps;
+  | StickyMenuProps
+  |TeamGridProps;
 
 export interface HeroSectionProps extends Base<"blocks.hero-section"> {
   theme: "black" | "blue";
@@ -204,12 +235,12 @@ export interface FeaturesBlockProps {
   };
 }
 
-export interface FeaturedArticleProps extends Base<"blocks.featured-article"> {
-  headline: string;
-  excerpt: string;
-  link: LinkProps;
-  image: ImageProps;
-}
+// export interface FeaturedArticleProps extends Base<"blocks.featured-article"> {
+//   headline: string;
+//   excerpt: string;
+//   link: LinkProps;
+//   image: ImageProps;
+// }
 
 export interface AboutSectionProps extends Base<"blocks.about-section"> {
   title: string;
@@ -260,7 +291,46 @@ export interface StickyMenuProps {
     text: string;
     href: string;
   }[];
+   hamnavigation: {
+    id: number;
+    text: string;
+    href: string;
+    isExternal:boolean;
+  }[];
   aboutInfoBlocks: Block[];
 }
 
-
+export interface TeamMember {
+  id: number;
+  FullName: string;
+  JobTitle: string;
+  ProfileImage: ImageProps;
+  CoverImage: ImageProps;
+  LinkedInUrl: string;
+  Bio: string;
+  slug: string;
+}
+ 
+export interface TeamGridProps extends Base<"blocks.team-grid"> {
+  Title: string;
+  description: string
+  team_members: TeamMember[];
+}
+ 
+// types/index.ts
+export interface TeamMemberProps {
+  id: number;
+  FullName: string;
+  JobTitle: string;
+  Bio?: string;
+  slug: string;
+  LinkedInUrl?: string;
+  ProfileImage?: {
+    data?: {
+      attributes: {
+        url: string;
+        alternativeText?: string;
+      };
+    };
+  };
+}

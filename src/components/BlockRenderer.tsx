@@ -16,6 +16,7 @@ import { Heading } from "@/components/blocks/Heading";
 import { Paragraph } from "@/components/blocks/Paragraph";
 import { ParagraphWithImage } from "@/components/blocks/ParagraphWithImage";
 import { StickyMenuBlock } from "@/components/blocks/StickyMenuBlock";
+import { TeamGrid } from "@/components/blocks/TeamGrid";
 
 
 function blockRenderer(block: Block, index: number,allBlocks: Block[]) {
@@ -60,10 +61,13 @@ function blockRenderer(block: Block, index: number,allBlocks: Block[]) {
         <StickyMenuBlock
           {...block}
           aboutInfoBlocks={aboutInfoBlocks}
+
           key={index}
         />
       );
     }
+    case "blocks.team-grid":
+      return <TeamGrid {...block} key={index}></TeamGrid>
     default:
       return null;
   }

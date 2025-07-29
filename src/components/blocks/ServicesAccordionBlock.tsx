@@ -3,10 +3,12 @@
 import { useState } from "react";
 import type { ServicesAccordionBlockProps } from "@/types";
 import { CiCirclePlus } from "react-icons/ci";
-import { FaCircleMinus } from "react-icons/fa6";
+import { FaMinusCircle } from "react-icons/fa";
 
-
-export function ServicesAccordionBlock({ heading ,items }: ServicesAccordionBlockProps) {
+export function ServicesAccordionBlock({
+  heading,
+  items,
+}: ServicesAccordionBlockProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleIndex = (index: number) => {
@@ -14,30 +16,42 @@ export function ServicesAccordionBlock({ heading ,items }: ServicesAccordionBloc
   };
 
   return (
-    <section className="max-w-3xl mx-auto py-12 px-4">
-      <h2 className="text-5xl font-bold mb-8">{heading}</h2>
-      <div className="space-y-4">
+    <section className="w-full max-w-7xl mx-auto py-16 px-25 sm:px-8">
+      <h2 className="text-5xl md:text-5xl font-bold mb-12 text-gray-900">
+        {heading}
+      </h2>
+
+      <div className="divide-y divide-gray-300">
         {items.map((item, index) => {
           const isOpen = index === openIndex;
+          const displayIndex = (index + 1).toString().padStart(2, "0");
+
           return (
-            <div
-              key={item.id}
-              className="border border-gray-300 rounded overflow-hidden"
-            >
+            <div key={item.id} className="bg-white">
               <button
                 onClick={() => toggleIndex(index)}
-                className="w-full text-left px-6 py-4 bg-gray-100 hover:bg-gray-200 font-medium text-lg flex justify-between items-center"
+                className="w-full flex items-start justify-between py-6 text-left"
               >
-                <span>{item.title}</span>
-              <span className="text-xl transform transition-transform duration-300">
-                {isOpen ? 
-                <h1 className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">hello </h1>
-                
-                : <CiCirclePlus className="inline" />}
-            </span>
+                <div className="flex gap-4 items-center">
+                  <span className="text-xl font-medium text-gray-900 w-10">
+                    {displayIndex}
+                  </span>
+                  <span className="text-lg md:text-xl font-semibold text-gray-900">
+                    {item.title}
+                  </span>
+                </div>
+
+                <div className="flex-shrink-0 pr-2 pt-1">
+                  {isOpen ? (
+                    <FaMinusCircle className="text-blue-500 text-lg" />
+                  ) : (
+                    <CiCirclePlus className="text-gray-800 text-2xl" />
+                  )}
+                </div>
               </button>
+
               {isOpen && (
-                <div className="px-6 py-4 text-gray-700 bg-white">
+                <div className="pl-[4.5rem] pr-4 pb-6 text-gray-600 text-sm leading-relaxed">
                   {item.description}
                 </div>
               )}

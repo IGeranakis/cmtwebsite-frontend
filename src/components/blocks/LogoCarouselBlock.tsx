@@ -8,7 +8,10 @@ export function LogoCarouselBlock({ items }: LogoCarouselBlockProps) {
   if (!items?.length) return null;
 
   return (
-    <section className="w-full bg-gradient-to-r from-blue-700 to-blue-200 py-10 overflow-hidden">
+    <section className="w-full py-10 overflow-hidden" style={{
+    background: "linear-gradient(90deg, #0074CC 13%, #B4D3EF 100%)",
+    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.15)",
+  }}>
       <div className="max-w-6xl mx-auto px-4">
         {/* Infinite Logo Carousel */}
         <div

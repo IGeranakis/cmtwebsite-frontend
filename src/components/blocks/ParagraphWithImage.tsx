@@ -7,9 +7,9 @@ export function ParagraphWithImage({
   image,
 }: Readonly<ParagraphWithImageProps>) {
   return (
-    <div className="flex flex-col items-center gap-6 my-8">
+    <div className="flex flex-col items-left gap-6 my-8">
       {/* Text Block */}
-      <div className="prose max-w-prose text-center text-gray-800">
+      <div className="prose max-w-none text-base leading-relaxed text-gray-800 my-6">
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>
 
