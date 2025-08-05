@@ -1,7 +1,7 @@
 "use client";
 
 import type { LogoCarouselBlockProps } from "@/types";
-import Image from "next/image";
+// import Image from "next/image";
 import { StrapiImage } from "../StrapiImage";
 
 export function LogoCarouselBlock({ items }: LogoCarouselBlockProps) {

@@ -21,7 +21,7 @@ export function VerticalAccordionBlock({ items }: VerticalAccordionBlockProps) {
     //   <div className="flex h-[400px] w-[min(40%,1200px)] rounded-md gap-3 transition-all duration-500 ease-in-out overflow-hidden">
     <section className="w-full max-w-7xl mx-auto py-12 px-4 sm:px-8">
 <div className="flex h-[500px] w-full max-w-6xl rounded-md gap-3 transition-all duration-500 ease-in-out overflow-hidden">
-        {visibleItems.map((item, index) => {
+        {visibleItems.map((item, /*index*/) => {
           const globalIndex = items.findIndex((i) => i === item);
           const isActive = globalIndex === activeIndex;
 

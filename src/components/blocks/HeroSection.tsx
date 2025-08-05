@@ -6,7 +6,7 @@ import type { HeroSectionProps } from "@/types";
 
 
 export function HeroSection({
-  theme,
+  // theme,
   heading,
   cta,
   image,

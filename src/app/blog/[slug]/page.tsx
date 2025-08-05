@@ -2,7 +2,7 @@ import type { ArticleProps, Block } from "@/types";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/utils/format-date";
 import { getContentBySlug } from "@/data/loaders";
-import { HeroSection } from "@/components/blocks/HeroSection";
+// import { HeroSection } from "@/components/blocks/HeroSection";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { Card, type CardProps } from "@/components/Card";
 import { ContentList } from "@/components/ContentList";

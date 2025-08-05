@@ -2,7 +2,7 @@
 
 import type { FeaturesBlockProps } from "@/types";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 export function FeaturesBlock({
   heading,

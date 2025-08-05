@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { TestimonialsBlockProps } from "@/types";
-import Image from "next/image";
+// import Image from "next/image";
 import { StrapiImage } from "../StrapiImage";
 import { AnimatedTestimonials } from "../ui/animated-testimonials";
 

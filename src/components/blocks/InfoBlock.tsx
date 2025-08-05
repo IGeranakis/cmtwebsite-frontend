@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StrapiImage } from "../StrapiImage";
+// import { StrapiImage } from "../StrapiImage";
 import type { InfoBlockProps } from "@/types";
 import { StrapiVideo } from "../StrapiVideo";
 

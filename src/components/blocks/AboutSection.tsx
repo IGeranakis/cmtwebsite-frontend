@@ -1,4 +1,4 @@
-import { ImageProps } from "@/types";
+// import { ImageProps } from "@/types";
 import { StrapiImage } from "@/components/StrapiImage";
  import { AboutSectionProps } from "@/types";
 // interface AboutSectionProps {

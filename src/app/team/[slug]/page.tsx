@@ -2,8 +2,13 @@ import { notFound } from "next/navigation";
 import qs from "qs";
 import { StrapiImage } from "@/components/StrapiImage";
 import {SocialIcon} from 'react-social-icons'
- 
+
 const STRAPI_API_URL = process.env.STRAPI_API_URL || "http://localhost:1337/api";
+
+interface PageProps {
+  params: Promise<{ slug: string }>
+}
+
  
 async function fetchTeamMember(slug: string) {
   const query = qs.stringify(
@@ -23,9 +28,12 @@ async function fetchTeamMember(slug: string) {
   const data = await res.json();
   return data?.data?.[0];
 }
+ export default async function MemberPage({ params }: PageProps) {
+
+// export default async function MemberPage({ params }: { params: { slug: string } }) {
+const slug = (await params).slug;
  
-export default async function MemberPage({ params }: { params: { slug: string } }) {
-  const member = await fetchTeamMember(params.slug);
+  const member = await fetchTeamMember(slug);
   if (!member) return notFound();
  
   const firstName = member.FullName.split(" ")[0];

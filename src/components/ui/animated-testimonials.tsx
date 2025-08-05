@@ -4,7 +4,7 @@ import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 
 type Testimonial = {
   quote: string;

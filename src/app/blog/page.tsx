@@ -2,16 +2,16 @@ import { getArticleOfTheDay,getPageBySlug,getCategories } from "@/data/loaders";
 import { FeaturedArticle } from "@/components/blocks/FeaturedArticle";
 
 import { notFound } from "next/navigation";
-import { BlockRenderer } from "@/components/BlockRenderer";
+// import { BlockRenderer } from "@/components/BlockRenderer";
 import { ContentList} from "@/components/ContentList"
 import { BlogCard } from "@/components/BlogCard";
 import CategoryFilter from "@/components/CategoryFilter";
 
-async function loader(slug: string) {
-  const { data } = await getPageBySlug(slug);
-  if (data.length === 0) notFound();
-  return { blocks: data[0]?.blocks };
-}
+// async function loader(slug: string) {
+//   const { data } = await getPageBySlug(slug);
+//   if (data.length === 0) notFound();
+//   return { blocks: data[0]?.blocks };
+// }
 
 interface PageProps {
   searchParams: Promise <{ page?:string; query?:string,category?: string}>
@@ -22,7 +22,7 @@ interface PageProps {
 export default async function BlogRoute({ searchParams }: PageProps) {
 //   const slug = (await params).slug;
   const {page,query,category} =await searchParams;
-  const { blocks } = await loader("blog");
+  // const { blocks } = await loader("blog");
   const featured = await getArticleOfTheDay();
  const categoryList = await getCategories();
   {console.log(featured)}

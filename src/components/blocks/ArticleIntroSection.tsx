@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { StrapiImage } from "../StrapiImage";
 import { ArticleProps } from "@/types";
 

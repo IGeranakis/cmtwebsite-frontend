@@ -152,6 +152,7 @@ const globalSettingQuery = qs.stringify({
 
 export async function getGlobalSettings() {
   const path = "/api/global";
+  console.log(BASE_URL);
   const url = new URL(path, BASE_URL);
   url.search = globalSettingQuery;
   return fetchAPI(url.href, { method: "GET" });

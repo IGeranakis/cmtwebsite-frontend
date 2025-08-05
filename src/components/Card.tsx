@@ -27,7 +27,7 @@ export function Card({
   image,
   author,
   imageAuthor,
-  price,
+  // price,
   createdAt,
   startDate,
   basePath,

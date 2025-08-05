@@ -1,6 +1,6 @@
 import type { MilestonesBlockProps } from "@/types";
 
-export function MilestoneBlock({ title, description, heading, milestones }: MilestonesBlockProps) {
+export function MilestoneBlock({ /*title, description,*/ heading, milestones }: MilestonesBlockProps) {
   return (
     <section className="bg-white py-16 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-12">

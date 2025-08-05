@@ -5,7 +5,7 @@ import { TeamGridProps } from "@/types";
 import { SocialIcon } from "react-social-icons";
 import Link from "next/link";
  
-export function TeamGrid({ Title, team_members }: Readonly<TeamGridProps>) {
+export function TeamGrid({ /*Title, */team_members }: Readonly<TeamGridProps>) {
   const [currentPage, setCurrentPage] = useState(1);
   const membersPerPage = 3;
  

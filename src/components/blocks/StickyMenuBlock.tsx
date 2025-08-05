@@ -1,6 +1,6 @@
 'use client';
 
-import { StickyMenuProps, AboutInfoProps, LinkProps,LogoProps } from "@/types";
+import { StickyMenuProps, AboutInfoProps, /* LinkProps,LogoProps*/ } from "@/types";
 import { StrapiImage } from "../StrapiImage";
 import { useScrollSpy } from "@/utils/useScrollspy";
 import { usePathname } from "next/navigation"; // ✅ Import this
