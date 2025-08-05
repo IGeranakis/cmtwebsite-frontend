@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       },
        {
         protocol: "https",
-        hostname: "newsite.cmtprooptiki.gr",
+        hostname: "cmtprooptiki.gr",
         pathname: "/uploads/**",
       },
     ],

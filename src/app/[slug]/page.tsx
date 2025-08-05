@@ -3,10 +3,19 @@ import { notFound } from "next/navigation";
 import { BlockRenderer } from "@/components/BlockRenderer";
 
 async function loader(slug: string) {
-  const { data } = await getPageBySlug(slug);
-  if (data.length === 0) notFound();
-  return { blocks: data[0]?.blocks };
+  const response = await getPageBySlug(slug);
+
+  // Check if data exists and is an array
+  if (!response || !response.data || !Array.isArray(response.data) || response.data.length === 0) {
+    notFound(); // ✅ Safely redirect to 404
+  }
+
+  console.log("Fetched slug data:", response);
+
+
+  return { blocks: response.data[0]?.blocks };
 }
+
 
 interface PageProps {
   params: Promise<{ slug: string }>
