@@ -5,6 +5,7 @@ import type { TestimonialsBlockProps } from "@/types";
 // import Image from "next/image";
 import { StrapiImage } from "../StrapiImage";
 import { AnimatedTestimonials } from "../ui/animated-testimonials";
+import { getStrapiURL } from "@/utils/get-strapi-url"; // ✅ ensure this exists
 
 
 export function TestimonialsBlock({ items }: TestimonialsBlockProps) {
@@ -59,7 +60,7 @@ export function TestimonialsBlock({ items }: TestimonialsBlockProps) {
     designation: item.position,
     src: item.image?.url?.startsWith("http")
       ? item.image.url
-      : `http://localhost:1337${item.image?.url}`,
+      : `${getStrapiURL()}${item.image?.url}`,
   }))}
 />
 
