@@ -22,7 +22,7 @@ async function fetchTeamMember(slug: string) {
     { encodeValuesOnly: true }
   );
  
-  const res = await fetch(`${STRAPI_API_URL}/team-members?${query}`, {
+  const res = await fetch(`${STRAPI_API_URL}/api/team-members?${query}`, {
     next: { revalidate: 60 },
   });
   const data = await res.json();
